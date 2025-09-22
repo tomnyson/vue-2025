@@ -4,6 +4,8 @@ import { ref, reactive } from "vue";
 import ThongBao from "./ThongBao.vue";
 import TrangThai from "./TrangThai.vue";
 import Products from "./components/Products.vue";
+import Login from "./components/Login.vue";
+import ListPost from "./components/ListPost.vue";
 /**
  * tên
  * chuyên ngành
@@ -54,11 +56,13 @@ const products = reactive([
 
 <template>
   <div class="container">
-  <ThongBao />
+  <!-- <ThongBao />
   <h1>Frontend framework 2025</h1>
   <ThongBao message="thông báo mới" />
   <TrangThai/>
   <Products :products="products"/>
+  <Login/> -->
+  <ListPost/>
   </div>
 
 </template>
