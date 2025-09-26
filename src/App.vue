@@ -6,6 +6,7 @@ import TrangThai from "./TrangThai.vue";
 import Products from "./components/Products.vue";
 import Login from "./components/Login.vue";
 import ListPost from "./components/ListPost.vue";
+import Modal from "./components/Modal.vue";
 /**
  * tên
  * chuyên ngành
@@ -63,6 +64,7 @@ const products = reactive([
   <Products :products="products"/>
   <Login/> -->
   <ListPost/>
+  <Modal/>
   </div>
 
 </template>
