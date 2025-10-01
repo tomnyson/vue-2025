@@ -55,6 +55,20 @@
       "tags": "news"
     }
   ],
+  "users": [
+    {
+      "name": "admin",
+      "username": "admin",
+      "password": "12356",
+      "role": "admin"
+    },
+    {
+      "name": "admin",
+      "username": "admin",
+      "password": "12356",
+      "role": "admin"
+    }
+  ],
   "comments": [
     {
       "id": "1",

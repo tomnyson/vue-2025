@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 const username = ref('')
 const password = ref('')
 const message = ref('')
@@ -15,7 +18,22 @@ const handleDangNhap = () => {
     else if (username.value === 'admin' && password.value === '123456') {
         message.value = 'Đăng nhập thành công'
         isSuccess.value = true
-    } else {
+        localStorage.setItem('currentUser', JSON.stringify({
+            username: 'admin',
+            role: 'admin'
+        }) )
+        router.push('/')
+    }
+    else if (username.value === 'user' && password.value === '123456') {
+        message.value = 'Đăng nhập thành công'
+        isSuccess.value = true
+        localStorage.setItem('currentUser', JSON.stringify({
+            username: 'admin',
+            role: 'user'
+        }) )
+         router.push('/')
+    }
+    else {
         message.value = 'Đăng nhập thất bại'
         isSuccess.value = false
     }

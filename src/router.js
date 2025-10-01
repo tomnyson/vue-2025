@@ -1,0 +1,44 @@
+import { createWebHistory, createRouter } from 'vue-router'
+
+import ListPostView from './pages/ListPost.vue'
+import PostDetailView from './pages/PostDetail.vue'
+import NotFound from './components/NotFound.vue'
+import Login from './components/Login.vue'
+import Profile from './components/Profile.vue'
+
+const routes = [
+    { path: '/', name: 'Home', component: ListPostView, meta: { isAuth: false } },
+    { path: '/posts', name: 'PostList', component: ListPostView, meta: { isAuth: false } },
+    { path: '/posts/:id', name: 'PostDetail', component: PostDetailView, meta: { isAuth: false } },
+    { path: '/login', name: 'Login', component: Login, meta: { isAuth: false } },
+    { path: '/profile', name: 'Profile', component: Profile, meta: { isAuth: true } },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFound,
+        meta: { isAuth: true }
+    },
+]
+const router = createRouter({
+    history: createWebHistory(''),
+    routes
+})
+/**
+ * check permission
+ * 
+ */
+router.beforeEach((to, from, next) => {
+    const currentUser = localStorage.getItem('currentUser');
+    if(to.meta.isAuth && currentUser){
+        const user = JSON.parse(currentUser)
+        console.log('user',user)
+        if(!user.role)
+        next({name: 'Login'});
+    } else {
+        next();
+    }
+    next()
+})
+
+export default router
+

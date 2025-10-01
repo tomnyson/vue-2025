@@ -1,6 +1,8 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, defineEmits } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+const router = useRouter();
 
 const posts = ref([])
 const post = reactive({
@@ -9,10 +11,16 @@ const post = reactive({
   image: '',
   description: ''
 })
+const emit = defineEmits(['remove'])
 
 onMounted(async () => {
   Loadulieu()
 })
+
+const handleDeleteEmit = (id) => {
+  emit('remove',id)
+}
+
 const handleDelete = async (id) => {
   //b1 
   const isConfirm = confirm(`bạn có muốn xoá id = ${id} này không ?`)
@@ -28,6 +36,7 @@ const handleDelete = async (id) => {
 
   }
 }
+
 const Loadulieu = async () => {
   console.log(`the component is now mounted.`)
   const response = await axios.get('http://localhost:3000/posts');
@@ -65,11 +74,16 @@ const clearData = () => {
     description: ''
   })
 }
+
+const goTo = (id) => {
+  router.push(`/posts/${id}`)
+}
 </script>
 <template>
   <main class="container py-4">
     <header class="d-flex align-items-center justify-content-between mb-3">
       <h1 class="h3 m-0">Latest Posts</h1>
+     
       <form class="d-none d-sm-flex" role="search">
         <input class="form-control form-control-sm" type="search" placeholder="Search posts" />
       </form>
@@ -107,10 +121,10 @@ const clearData = () => {
           </div>
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
-              <h2 class="h5 mb-1">{{ item.title }}</h2>
+              <RouterLink :to="`/posts/${item.id}`"><h2 class="h5 mb-1">{{ item.title }}</h2></RouterLink>
               <!-- <small class="text-muted">Sep 24, 2025</small> -->
               <!-- <i class="pi pi-times" style="color: red"></i> -->
-              <button @click="handleDelete(item.id)">Remove</button>
+              <button @click="handleDeleteEmit(item.id)">Remove</button>
             </div>
             <div class="mb-2">
               <small class="text-muted">by <strong>{{ item.creator }}</strong> · {{ item.time }} min read</small>
@@ -118,6 +132,7 @@ const clearData = () => {
             <p class="post-excerpt mb-2">
               {{ item.description }}
             </p>
+              <button @click="goTo(item.id)">read more</button> 
             <!-- <div class="d-flex gap-2">
               <span class="badge text-bg-primary">News</span>
               <span class="badge text-bg-secondary">Tutorial</span>
