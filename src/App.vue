@@ -61,6 +61,7 @@ const dynamicSlotName = ref("header");
 const switchSlot = () => {
   dynamicSlotName.value = dynamicSlotName.value === "header" ? "footer" : "header";
 };
+
 </script>
 
 <template>

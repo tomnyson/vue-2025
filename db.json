@@ -59,14 +59,14 @@
     {
       "name": "admin",
       "username": "admin",
-      "password": "12356",
+      "password": "123456",
       "role": "admin"
     },
     {
-      "name": "admin",
-      "username": "admin",
-      "password": "12356",
-      "role": "admin"
+      "name": "user",
+      "username": "user",
+      "password": "123456",
+      "role": "user"
     }
   ],
   "comments": [

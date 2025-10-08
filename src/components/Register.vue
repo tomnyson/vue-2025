@@ -15,40 +15,43 @@ console.log("call api", API)
  *  -> dang nhap -> method get username, password
  */
 const isCheckLogin = async (username, password) => {
-  console.log(`the component is now mounted.`)
-  const response = await axios.get(`${API}/users`);
-  if (response.status == 200) {
-       const user = response.data.find(item => item.username === username && item.password === password)
-       if(user) {
-        localStorage.setItem('currentUser', JSON.stringify(user))
+    console.log(`the component is now mounted.`)
+    const response = await axios.get(`${API}/users`);
+    if (response.status == 200) {
+        const user = response.data.find(item => item.username === username && item.password === password)
+        if (user) {
+            localStorage.setItem('currentUser', JSON.stringify(user))
 
-        return true
-       }
-  }
-  return false
+            return true
+        }
+    }
+    return false
 }
-const handleDangNhap = async() => {
+const handleDangNhap = async () => {
     if (username.value === "") {
         message.value = "username not empty"
     }
     else if (password.value === "") {
         message.value = "password not empty"
     }
-    
-    const isResult = await isCheckLogin(username.value, password.value);
-    if(isResult) {
+
+
+    const isResult = await isCheckRegister(username.value, password.vale);
+    if (isResult) {
         router.push('/')
     }
+
 }
 
 </script>
 <template>
-    <h1>Login form</h1>
+    <h1>Register form</h1>
     <form>
         <input type="text" v-model="username" placeholder="username" />
         <input type="password" v-model="password" placeholder="password" />
         <input @click="handleDangNhap" type="button" value="đăng nhập" />
         <span :class="{ success: isSuccess, error: !isSuccess }">{{ message }}</span>
+
     </form>
 </template>
 <style scoped>
@@ -58,6 +61,7 @@ form {
     border: 2px solid green;
     padding: 20px;
 }
+
 form input {
     width: 100%;
     display: block;
@@ -71,6 +75,7 @@ form input {
 .error {
     color: red;
 }
+
 h1 {
     text-align: center;
 }

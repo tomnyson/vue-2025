@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bootstrap • Product Detail Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body { background-color:#f5f7fb; }
+    .product-hero-img { max-height:520px; object-fit:cover; border-radius:1rem; }
+    .product-thumb { width:80px; height:80px; object-fit:cover; border-radius:.75rem; border:2px solid transparent; cursor:pointer; }
+    .product-thumb.active { border-color:#0d6efd; }
+    .badge-soft { background-color:rgba(13,110,253,.1); color:#0d6efd; }
+    .spec-table th { width:200px; }
+    .review-card { border-radius:1rem; border:1px solid rgba(0,0,0,.05); }
+  </style>
+</head>
+<body>
+  <header class="py-4 bg-white border-bottom mb-4">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap gap-3">
+      <h1 class="h4 mb-0">MyShop</h1>
+      <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" href="product.html">Back to Products</a>
+        <a class="btn btn-primary" href="#related">View Related</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="product.html">Products</a></li>
+        <li class="breadcrumb-item"><a href="#">Electronics</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Wireless Headphones</li>
+      </ol>
+    </nav>
+
+    <section class="row g-4 align-items-start mb-5">
+      <div class="col-lg-6">
+        <div class="bg-white shadow-sm p-3 rounded-4 mb-3">
+          <img class="product-hero-img w-100" src="https://picsum.photos/seed/phones/800/600" alt="Wireless Headphones">
+        </div>
+        <div class="d-flex gap-3">
+          <img class="product-thumb active" src="https://picsum.photos/seed/phones/200/200" alt="Front view">
+          <img class="product-thumb" src="https://picsum.photos/seed/phones-side/200/200" alt="Side view">
+          <img class="product-thumb" src="https://picsum.photos/seed/phones-case/200/200" alt="Carrying case">
+        </div>
+      </div>
+
+      <aside class="col-lg-6">
+        <div class="bg-white shadow-sm p-4 rounded-4">
+          <span class="badge badge-soft mb-3">Electronics</span>
+          <h2 class="h2">Wireless Headphones</h2>
+          <p class="text-secondary">Noise-cancelling over-ear headphones with 30 hours of battery life and quick USB-C charging.</p>
+
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+            <div class="h3 mb-0">$79.99</div>
+            <span class="text-warning">
+              &#9733;&#9733;&#9733;&#9733;&#189;
+            </span>
+            <small class="text-secondary">4.7 • 128 reviews</small>
+          </div>
+
+          <div class="border rounded-3 p-3 bg-light mb-4">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-2">
+              <span class="badge text-bg-success">In Stock</span>
+              <span>Ships in 1-2 business days • Free returns for 30 days</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <h6 class="text-uppercase text-secondary mb-3">Highlights</h6>
+            <ul class="list-unstyled d-grid gap-2">
+              <li class="d-flex align-items-start gap-2"><span class="text-primary">•</span><span>Active noise cancelling with transparency mode for quick awareness.</span></li>
+              <li class="d-flex align-items-start gap-2"><span class="text-primary">•</span><span>Dual-device pairing keeps music going when calls come in.</span></li>
+              <li class="d-flex align-items-start gap-2"><span class="text-primary">•</span><span>Soft memory-foam earcups for all-day comfort.</span></li>
+              <li class="d-flex align-items-start gap-2"><span class="text-primary">•</span><span>Fast charge: 10 minutes = 5 hours of playback.</span></li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label text-secondary">Color</label>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-outline-dark btn-sm active">Graphite</button>
+              <button type="button" class="btn btn-outline-dark btn-sm">Ice Blue</button>
+              <button type="button" class="btn btn-outline-dark btn-sm">Sandstone</button>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-primary btn-lg" href="#">Add to Cart</a>
+            <a class="btn btn-outline-secondary btn-lg" href="#">Buy Now</a>
+            <button class="btn btn-link text-decoration-none">Save for Later</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="row g-4 mb-5">
+      <div class="col-lg-7">
+        <div class="bg-white shadow-sm p-4 rounded-4 h-100">
+          <h3 class="h5 mb-4">Product Overview</h3>
+          <p>Experience immersive sound with advanced noise cancellation that adapts to your surroundings in real time. Custom-tuned 40 mm drivers deliver deep bass and crisp highs, while the lightweight frame keeps you comfortable from commute to couch.</p>
+          <p>Use the companion app to personalize EQ, configure adaptive modes, and locate misplaced headphones. Built-in microphones leverage beamforming technology for crystal-clear calls, even in noisy spaces.</p>
+          <div class="row g-3 mt-3">
+            <div class="col-sm-6">
+              <div class="p-3 border rounded-3 bg-light h-100">
+                <h6 class="text-uppercase text-secondary">What’s Included</h6>
+                <ul class="mb-0 ps-3">
+                  <li>Wireless headphones</li>
+                  <li>USB-C charging cable</li>
+                  <li>3.5 mm audio cable</li>
+                  <li>Travel case</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 border rounded-3 bg-light h-100">
+                <h6 class="text-uppercase text-secondary">Perfect For</h6>
+                <ul class="mb-0 ps-3">
+                  <li>Remote work & focus</li>
+                  <li>Daily commuting</li>
+                  <li>Travel & flights</li>
+                  <li>Casual gaming</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="bg-white shadow-sm p-4 rounded-4 h-100">
+          <h3 class="h5 mb-4">Technical Specifications</h3>
+          <table class="table table-borderless align-middle spec-table mb-0">
+            <tbody>
+              <tr>
+                <th scope="row" class="text-secondary">Battery Life</th>
+                <td>Up to 30 hours (ANC on)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-secondary">Charging</th>
+                <td>USB-C fast charge, 10 min for 5 hours</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-secondary">Audio Codecs</th>
+                <td>AAC, SBC, aptX</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-secondary">Connectivity</th>
+                <td>Bluetooth 5.3, multipoint</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-secondary">Weight</th>
+                <td>275 g</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-secondary">Warranty</th>
+                <td>2-year limited</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <h3 class="h5 mb-4">Customer Reviews</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="review-card p-4 bg-white h-100">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <strong>Alex P.</strong>
+              <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p class="text-secondary small mb-2">March 3, 2024</p>
+            <p class="mb-0">“Best commuter purchase I have made. ANC blocks the subway completely and they stay comfortable even with glasses.”</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card p-4 bg-white h-100">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <strong>Jordan K.</strong>
+              <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#189;</span>
+            </div>
+            <p class="text-secondary small mb-2">February 18, 2024</p>
+            <p class="mb-0">“Sound quality is excellent and pairing with my laptop and phone simultaneously just works. Wish the case was a bit smaller.”</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="review-card p-4 bg-white h-100">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <strong>Riley S.</strong>
+              <span class="text-warning">&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p class="text-secondary small mb-2">January 30, 2024</p>
+            <p class="mb-0">“Great battery life and clarity during meetings. ANC is strong but the transparency mode takes a second to toggle.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="related" class="mb-5">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h3 class="h5 mb-0">Related Products</h3>
+        <a class="btn btn-outline-primary btn-sm" href="product.html">Explore All</a>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/seed/speaker/400/300" class="card-img-top" alt="Bluetooth Speaker">
+            <div class="card-body">
+              <span class="badge text-bg-dark mb-2">Electronics</span>
+              <h5 class="card-title">Bluetooth Speaker</h5>
+              <p class="card-text text-secondary small">Portable, waterproof speaker with punchy bass.</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <strong>$39.99</strong>
+                <a href="#" class="link-primary">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/seed/lamp/400/300" class="card-img-top" alt="Smart LED Lamp">
+            <div class="card-body">
+              <span class="badge text-bg-dark mb-2">Home</span>
+              <h5 class="card-title">Smart LED Lamp</h5>
+              <p class="card-text text-secondary small">Adaptive lighting with app control and schedules.</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <strong>$29.50</strong>
+                <a href="#" class="link-primary">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <img src="https://picsum.photos/seed/bottle/400/300" class="card-img-top" alt="Stainless Water Bottle">
+            <div class="card-body">
+              <span class="badge text-bg-dark mb-2">Sports</span>
+              <h5 class="card-title">Stainless Water Bottle</h5>
+              <p class="card-text text-secondary small">Vacuum insulated bottle keeps drinks cold for 24 hours.</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <strong>$15.75</strong>
+                <a href="#" class="link-primary">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4 bg-dark text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <span>© 2025 MyShop</span>
+      <div class="d-flex gap-2">
+        <a class="btn btn-outline-light btn-sm" href="#top">Back to top</a>
+        <a class="btn btn-outline-light btn-sm" href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

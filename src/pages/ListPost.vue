@@ -44,6 +44,7 @@ const Loadulieu = async () => {
     posts.value = response.data
   }
 }
+
 const handleSubmit = async () => {
   if (post.title === "") {
     alert('title khong de trong')

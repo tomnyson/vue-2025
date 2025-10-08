@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
+import Register from './components/Register.vue'
 import ListPostView from './pages/ListPost.vue'
 import PostDetailView from './pages/PostDetail.vue'
 import NotFound from './components/NotFound.vue'
@@ -7,11 +8,13 @@ import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
 
 const routes = [
+
     { path: '/', name: 'Home', component: ListPostView, meta: { isAuth: false } },
     { path: '/posts', name: 'PostList', component: ListPostView, meta: { isAuth: false } },
     { path: '/posts/:id', name: 'PostDetail', component: PostDetailView, meta: { isAuth: false } },
     { path: '/login', name: 'Login', component: Login, meta: { isAuth: false } },
     { path: '/profile', name: 'Profile', component: Profile, meta: { isAuth: true } },
+    { path: '/register',name: 'Register', componnent: Register,meta: {isAuth: false} },
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',

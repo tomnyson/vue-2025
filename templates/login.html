@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bootstrap • Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body { min-height:100vh; background:linear-gradient(135deg,#f5f7fb,#dbe6ff); }
+    .auth-card { border-radius:1.5rem; overflow:hidden; box-shadow:0 1.5rem 3rem -1.5rem rgba(13,37,62,.4); }
+    .auth-illustration { background:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80') center/cover no-repeat; }
+    .form-floating > label { color:#6c757d; }
+    .logo { font-weight:600; letter-spacing:.02em; }
+  </style>
+</head>
+<body>
+  <header class="position-absolute top-0 start-0 end-0 py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="text-decoration-none text-dark logo" href="product.html">MyShop</a>
+      <nav class="d-flex gap-3">
+        <a class="text-secondary" href="product.html">Products</a>
+        <a class="text-secondary" href="detail.html">Featured</a>
+        <a class="btn btn-outline-primary btn-sm" href="register.html">Create account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container d-flex align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="row g-0 auth-card w-100" style="max-width:960px;">
+      <div class="col-lg-6 auth-illustration d-none d-lg-block"></div>
+      <div class="col-lg-6 bg-white p-5">
+        <div class="mb-4">
+          <h1 class="h3 mb-1">Welcome back</h1>
+          <p class="text-secondary">Sign in to continue managing your products and orders.</p>
+        </div>
+
+        <form action="#" method="post" class="d-grid gap-3">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="loginEmail" name="email" placeholder="name@example.com" required>
+            <label for="loginEmail">Email address</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password" required>
+            <label for="loginPassword">Password</label>
+          </div>
+
+          <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="remember" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <a class="small text-decoration-none" href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+
+          <div class="text-center text-secondary">or continue with</div>
+          <div class="d-flex gap-3">
+            <button type="button" class="btn btn-outline-secondary w-100">Google</button>
+            <button type="button" class="btn btn-outline-secondary w-100">Facebook</button>
+          </div>
+        </form>
+
+        <div class="text-center mt-4">
+          <span class="text-secondary">New here?</span>
+          <a class="text-decoration-none" href="register.html">Create an account</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-4 text-center text-secondary small">
+    <div class="container">© 2025 MyShop. Crafted for WEB2072 coursework.</div>
+  </footer>
+</body>
+</html>
