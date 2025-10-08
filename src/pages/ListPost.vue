@@ -13,6 +13,7 @@ const post = reactive({
 })
 const emit = defineEmits(['remove'])
 
+const API = import.meta.env.VITE_URL_API || 'http://localhost:3000'
 onMounted(async () => {
   Loadulieu()
 })
@@ -20,7 +21,6 @@ onMounted(async () => {
 const handleDeleteEmit = (id) => {
   emit('remove',id)
 }
-
 const handleDelete = async (id) => {
   //b1 
   const isConfirm = confirm(`bạn có muốn xoá id = ${id} này không ?`)
@@ -39,7 +39,7 @@ const handleDelete = async (id) => {
 
 const Loadulieu = async () => {
   console.log(`the component is now mounted.`)
-  const response = await axios.get('http://localhost:3000/posts');
+  const response = await axios.get(`${API}/posts`);
   if (response.status == 200) {
     posts.value = response.data
   }
@@ -83,7 +83,7 @@ const goTo = (id) => {
 <template>
   <main class="container py-4">
     <header class="d-flex align-items-center justify-content-between mb-3">
-      <h1 class="h3 m-0">Latest Posts</h1>
+      <h1 class="h3 m-0">Latest Posts Test</h1>
      
       <form class="d-none d-sm-flex" role="search">
         <input class="form-control form-control-sm" type="search" placeholder="Search posts" />
