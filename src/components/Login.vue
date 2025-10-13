@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 
 const router = useRouter()
+const route = useRoute();
+
 const username = ref('')
 const password = ref('')
 const message = ref('')
@@ -36,8 +38,15 @@ const handleDangNhap = async() => {
     }
     
     const isResult = await isCheckLogin(username.value, password.value);
+
     if(isResult) {
-        router.push('/')
+        const query = route.query
+        if(query !== '') {
+            router.push(`/${query.callback}`)
+        } else {
+            route.push('/')
+        }
+        
     }
 }
 

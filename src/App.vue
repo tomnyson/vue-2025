@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, provide, onMounted } from "vue";
 // code trong này
 import Products from "./components/Products.vue";
 import Login from "./components/Login.vue";
@@ -62,6 +62,19 @@ const switchSlot = () => {
   dynamicSlotName.value = dynamicSlotName.value === "header" ? "footer" : "header";
 };
 
+onMounted(()=>{
+  const currentUser = localStorage.getItem('currentUser') 
+  if(currentUser) {
+    provide('isCheck', JSON.parse(currentUser))
+  }else {
+    provide('isCheck',undefined)
+  }
+
+})
+/** check auth */
+
+
+
 </script>
 
 <template>
@@ -92,7 +105,7 @@ const switchSlot = () => {
   </div>
   <BaseLayout>
     <template #content>
-        <DemoStore/>
+        <!-- <DemoStore/> -->
         <router-view></router-view>
     </template>
   </BaseLayout>
