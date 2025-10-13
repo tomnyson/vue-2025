@@ -1,14 +1,14 @@
 <script setup>
 import { ref, reactive } from "vue";
 // code trong này
-import ThongBao from "./ThongBao.vue";
-import TrangThai from "./TrangThai.vue";
 import Products from "./components/Products.vue";
 import Login from "./components/Login.vue";
 import ListPost from "./pages/ListPost.vue";
 import Modal from "./components/Modal.vue";
 import ChildComponent from "./components/ChildComponent.vue";
 import BaseLayout from "./components/BaseLayout.vue";
+import DemoStore from "./components/DemoStore.vue";
+import ProductList from "./components/ProductList.vue";
 /**
  * tên
  * chuyên ngành
@@ -92,6 +92,7 @@ const switchSlot = () => {
   </div>
   <BaseLayout>
     <template #content>
+        <DemoStore/>
         <router-view></router-view>
     </template>
   </BaseLayout>

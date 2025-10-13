@@ -60,13 +60,15 @@
       "name": "admin",
       "username": "admin",
       "password": "123456",
-      "role": "admin"
+      "role": "admin",
+      "id": "d6d9"
     },
     {
       "name": "user",
       "username": "user",
       "password": "123456",
-      "role": "user"
+      "role": "user",
+      "id": "26a0"
     }
   ],
   "comments": [
@@ -83,5 +85,62 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop Gaming",
+      "price": 1299.99,
+      "image": "https://placehold.co/300x300/3b82f6/white?text=Laptop",
+      "description": "High-performance gaming laptop with RTX 4060",
+      "category": "Electronics",
+      "stock": 15
+    },
+    {
+      "id": "2",
+      "name": "Wireless Mouse",
+      "price": 29.99,
+      "image": "https://placehold.co/300x300/10b981/white?text=Mouse",
+      "description": "Ergonomic wireless mouse with RGB lighting",
+      "category": "Accessories",
+      "stock": 50
+    },
+    {
+      "id": "3",
+      "name": "Mechanical Keyboard",
+      "price": 89.99,
+      "image": "https://placehold.co/300x300/8b5cf6/white?text=Keyboard",
+      "description": "RGB mechanical keyboard with blue switches",
+      "category": "Accessories",
+      "stock": 30
+    },
+    {
+      "id": "4",
+      "name": "USB-C Hub",
+      "price": 49.99,
+      "image": "https://placehold.co/300x300/f59e0b/white?text=USB+Hub",
+      "description": "7-in-1 USB-C hub with HDMI and card reader",
+      "category": "Accessories",
+      "stock": 25
+    },
+    {
+      "id": "5",
+      "name": "Webcam HD",
+      "price": 79.99,
+      "image": "https://placehold.co/300x300/ef4444/white?text=Webcam",
+      "description": "1080p HD webcam with auto-focus",
+      "category": "Electronics",
+      "stock": 20
+    },
+    {
+      "id": "6",
+      "name": "Headphones",
+      "price": 149.99,
+      "image": "https://placehold.co/300x300/06b6d4/white?text=Headphones",
+      "description": "Noise-cancelling wireless headphones",
+      "category": "Audio",
+      "stock": 35
+    }
+  ],
+  "cart": []
 }
