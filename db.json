@@ -144,6 +144,31 @@
   ],
   "cart": [],
   "orders": [
-    
+    {
+      "id": "a1e5",
+      "name": "13131",
+      "sdt": "313131313",
+      "address": "131313131313",
+      "email": "31313@gmail.com",
+      "pay_type": "cod",
+      "items": [
+        {
+          "id": "1",
+          "name": "Laptop Gaming",
+          "price": 1299.99,
+          "quantity": 3
+        },
+        {
+          "id": "2",
+          "name": "Wireless Mouse",
+          "price": 29.99,
+          "quantity": 4
+        }
+      ],
+      "total": 4019.9300000000003,
+      "created_at": 1760456310773,
+      "status": "pending",
+      "user_id": "d6d9"
+    }
   ]
 }
