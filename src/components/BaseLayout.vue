@@ -1,4 +1,11 @@
 <script setup>
+import { computed } from 'vue';
+import { RouterLink } from 'vue-router'; 
+import { useStore } from 'vuex';
+
+const store = useStore();
+const countCart = computed(() => store.getters['countCart'])
+
 </script>
 <template>
     <main class="container py-4">
@@ -13,7 +20,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <RouterLink class="nav-link" to="/products">Products</RouterLink>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Features</a>
@@ -22,7 +29,7 @@
                                 <a class="nav-link" href="#">Pricing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                                <RouterLink class="nav-link" to="/carts">Carts({{ countCart }})</RouterLink>
                             </li>
                         </ul>
                     </div>

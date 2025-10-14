@@ -6,10 +6,11 @@ import PostDetailView from './pages/PostDetail.vue'
 import NotFound from './components/NotFound.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
-import ShoppingCartPage from './pages/ShoppingCartPage.vue'
+// import ShoppingCartPage from './pages/ShoppingCartPage.vue'
 import ProductsPage from './pages/ProductsPage.vue'
 import PrimeVueDemoPage from './pages/PrimeVueDemoPage.vue'
 import ProductList from './components/ProductList.vue'
+import Carts from './pages/Carts.vue'
 
 const routes = [
 
@@ -20,7 +21,7 @@ const routes = [
     { path: '/profile', name: 'Profile', component: Profile, meta: { isAuth: true } },
     { path: '/register', name: 'Register', component: Register, meta: { isAuth: false } },
     { path: '/products', name: 'Products', component: ProductList, meta: { isAuth: false } },
-    { path: '/cart', name: 'ShoppingCart', component: ShoppingCartPage, meta: { isAuth: false } },
+    { path: '/carts', name: 'ShoppingCart', component: Carts, meta: { isAuth: true } },
     { path: '/primevue-demo', name: 'PrimeVueDemo', component: PrimeVueDemoPage, meta: { isAuth: false } },
     {
         path: '/:pathMatch(.*)*',

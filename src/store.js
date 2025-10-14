@@ -19,6 +19,12 @@ const store = createStore({
     }
   },
   getters: {
+    countCart: (state) => {
+      return state.carts.length
+    },
+    totalCart: (state) => {
+      return  state.carts.reduce((total, item) => total + (item.price * item.quantity), 0)
+    }
   },
   mutations: {
     increment(state) {
