@@ -1,5 +1,6 @@
 import jsonServer from "json-server";
 import jwt from "jsonwebtoken";
+import 'dotenv/config'
 
 const SECRET = "dev-only-secret"; // change for your local env
 const PORT = process.env.PORT || 3001;
@@ -7,6 +8,31 @@ const PORT = process.env.PORT || 3001;
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
+
+
+import { VNPay, ignoreLogger } from 'vnpay';
+// init vnpay
+console.log('env', process.env)
+const vnpay = new VNPay({
+  // ⚡ Cấu hình bắt buộc
+  tmnCode: process.env.vnp_TmnCode,
+  secureSecret: process.env.vnp_HashSecret,
+  vnpayHost: 'https://sandbox.vnpayment.vn',
+
+  // 🔧 Cấu hình tùy chọn
+  testMode: true, // Chế độ test
+  hashAlgorithm: 'SHA512', // Thuật toán mã hóa
+  enableLog: true, // Bật/tắt log
+  loggerFn: ignoreLogger, // Custom logger
+
+  // 🔧 Custom endpoints
+  endpoints: {
+    paymentEndpoint: 'paymentv2/vpcpay.html',
+    queryDrRefundEndpoint: 'merchant_webapi/api/transaction',
+    getBankListEndpoint: 'qrpayauth/api/merchant/get_bank_list',
+  },
+});
+
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
@@ -64,6 +90,33 @@ server.post("/login", (req, res) => {
   const token = createToken({ sub: user.id, username: user.username, role: user.role || "user" });
   return res.json({ access_token: token, user: { id: user.id, username: user.username } });
 });
+
+// payment method
+server.post("/init-url", (req, res) => {
+  const { amount, order_id } = req.body || {};
+
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+
+  const paymentUrl = vnpay.buildPaymentUrl({
+    vnp_Amount: Number(amount), // 100,000 VND
+    vnp_IpAddr: ip,
+    vnp_ReturnUrl: process.env.vnp_ReturnUrl,
+    vnp_TxnRef: order_id,
+    vnp_OrderInfo: 'Thanh toán đơn hàng #123',
+  });
+  return res.json({ url: paymentUrl });
+});
+
+server.get("/verify", (req, res) => {
+  console.log('call here')
+  const verify = vnpay.verifyReturnUrl(req.query);
+  if (verify.isSuccess) {
+    return res.json({message: 'ok'})
+  } else {
+     return res.status(400).json({message: 'fail'})
+  }
+});
+
 
 // Protect specific routes (example: POST /customers requires auth)
 server.use((req, res, next) => {
