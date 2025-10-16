@@ -1,6 +1,18 @@
 import jsonServer from "json-server";
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
+import nodemailer from "nodemailer";
+
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: process.env.user,
+        pass: process.env.pass
+    },
+});
 
 const SECRET = "dev-only-secret"; // change for your local env
 const PORT = process.env.PORT || 3001;
@@ -106,6 +118,24 @@ server.post("/init-url", (req, res) => {
   });
   return res.json({ url: paymentUrl });
 });
+
+server.post("/mail", async (req, res) => {
+  try {
+    const {to, content, subject} = req.body
+    await transporter.sendMail({
+          from: '"info" <tabletkindfire@gmail.com>',
+          to: to || 'tabletkindfire@gmail.com',
+          subject: subject || 'no subject',
+          html: content || '', // HTML body
+      });
+      return res.json({message: 'ok'})
+  } catch (error) {
+    console.log(error)
+     return res.status(400).json({message: 'failed'})
+  }
+   
+});
+
 
 server.get("/verify", (req, res) => {
   console.log('call here')
