@@ -5,21 +5,44 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 const API = import.meta.env.VITE_URL_API || 'http://localhost:3000';
 
+
+import { VNPay, ignoreLogger } from 'vnpay';
+
+const vnpay = new VNPay({
+  // ⚡ Cấu hình bắt buộc
+  tmnCode: 'GQ3DKAB1',
+  secureSecret: 'YMNSKY4N5CF123H3MI2F6AV0GUV9XTPA',
+  vnpayHost: 'https://sandbox.vnpayment.vn',
+
+  // 🔧 Cấu hình tùy chọn
+  testMode: true, // Chế độ test
+  hashAlgorithm: 'SHA512', // Thuật toán mã hóa
+  enableLog: true, // Bật/tắt log
+  loggerFn: ignoreLogger, // Custom logger
+
+  // 🔧 Custom endpoints
+  endpoints: {
+    paymentEndpoint: 'paymentv2/vpcpay.html',
+    queryDrRefundEndpoint: 'merchant_webapi/api/transaction',
+    getBankListEndpoint: 'qrpayauth/api/merchant/get_bank_list',
+  },
+});
+
 const store = useStore();
 const carts = computed(() => store.state.carts)
 const totalCart = computed(() => store.getters['totalCart'])
 const orderInfo = reactive({
-    name: "",
-    sdt: "",
-    address: "",
-    email: "",
-    total: 0,
-    items: [],
-    pay_type: "cod"
+  name: "",
+  sdt: "",
+  address: "",
+  email: "",
+  total: 0,
+  items: [],
+  pay_type: "cod"
 })
 
 watch(orderInfo, (current) => {
-    console.log('Current value of count:', current)
+  console.log('Current value of count:', current)
 })
 
 const clearData = () => {
@@ -38,33 +61,46 @@ const handleRemove = (id) => {
 };
 
 const handleSubmit = async (e) => {
-     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}')
-    const payload = {
-        name: orderInfo.name,
-        sdt: orderInfo.sdt,
-        address: orderInfo.address,
-        email: orderInfo.email,
-        pay_type: orderInfo.pay_type,
-        items: carts.value.map(item => ({
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity
-        })),
-        total: totalCart.value,
-        created_at: Date.now(),
-        status: 'pending',
-        user_id: currentUser ? currentUser.id : null
-    }
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}')
+  const payload = {
+    name: orderInfo.name,
+    sdt: orderInfo.sdt,
+    address: orderInfo.address,
+    email: orderInfo.email,
+    pay_type: orderInfo.pay_type,
+    items: carts.value.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity
+    })),
+    total: totalCart.value,
+    created_at: Date.now(),
+    status: 'pending',
+    user_id: currentUser ? currentUser.id : null
+  }
 
-    const response = await axios.post('http://localhost:3000/orders', payload);
-    console.log(response);
-    if (response.status == 201) {
-        clearData()
-        alert('dã mua hàng  thành công')
-    }
+  const response = await axios.post('http://localhost:3000/orders', payload);
+  console.log(response);
+  if (response.status == 201) {
+    clearData()
+    alert('dã mua hàng  thành công')
+  }
 }
-
+const handleVNpay = async () => {
+  // localhost 30001
+  /**
+   * amount: 5000
+   * order_id: order_id
+   * window.location.href
+   */
+  const payload = { order_id: new Date().getTime(), amount: 500000 }
+  const response = await axios.post('http://localhost:3001/init-url', payload);
+  console.log(response.data.url);
+  if (response.status == 200) {
+    window.location.href = response.data.url
+  }
+}
 
 </script>
 
@@ -82,12 +118,14 @@ const handleSubmit = async (e) => {
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Họ và tên</label>
-                  <input type="text" class="form-control" v-model="orderInfo.name" required placeholder="Nguyễn Văn A" />
+                  <input type="text" class="form-control" v-model="orderInfo.name" required
+                    placeholder="Nguyễn Văn A" />
                   <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Email</label>
-                  <input type="email" class="form-control" v-model="orderInfo.email" required placeholder="ban@email.com" />
+                  <input type="email" class="form-control" v-model="orderInfo.email" required
+                    placeholder="ban@email.com" />
                   <div class="invalid-feedback">Email chưa hợp lệ.</div>
                 </div>
                 <div class="col-md-6">
@@ -104,7 +142,8 @@ const handleSubmit = async (e) => {
               <div class="row g-3">
                 <div class="col-12">
                   <label class="form-label">Địa chỉ</label>
-                  <input type="text" v-model="orderInfo.address" class="form-control" required placeholder="Số nhà, đường, phường/xã" />
+                  <input type="text" v-model="orderInfo.address" class="form-control" required
+                    placeholder="Số nhà, đường, phường/xã" />
                   <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
                 </div>
               </div>
@@ -116,17 +155,20 @@ const handleSubmit = async (e) => {
               <div class="row g-3">
                 <div class="col-12">
                   <div class="form-check">
-                    <input class="form-check-input" v-model="orderInfo.pay_type" type="radio" value="cod" name="payment" id="payCOD" checked />
+                    <input class="form-check-input" v-model="orderInfo.pay_type" type="radio" value="cod" name="payment"
+                      id="payCOD" checked />
                     <label class="form-check-label" for="payCOD">Thanh toán khi nhận hàng (COD)</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" v-model="orderInfo.pay_type" type="radio" value="vnpay" name="payment" id="payCard" />
+                    <input class="form-check-input" v-model="orderInfo.pay_type" type="radio" value="vnpay"
+                      name="payment" id="payCard" />
                     <label class="form-check-label" for="payCard">Thẻ VNPAY</label>
                   </div>
                 </div>
               </div>
 
               <button type="submit" class="btn btn-primary mt-3">Thanh toán</button>
+              <button type="button" class="btn btn-primary" @click="handleVNpay">VNPAY TEST</button>
             </form>
           </div>
         </div>
